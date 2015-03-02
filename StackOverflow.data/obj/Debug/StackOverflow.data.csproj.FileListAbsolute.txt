@@ -1,0 +1,14 @@
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\bin\Debug\StackOverflow.data.dll.config
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\bin\Debug\StackOverflow.data.dll
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\bin\Debug\StackOverflow.data.pdb
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\bin\Debug\EntityFramework.dll
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\bin\Debug\StackOverflowOsc.Domain.dll
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\bin\Debug\StackOverflowOsc.Domain.pdb
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\bin\Debug\EntityFramework.xml
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.csprojResolveAssemblyReference.cache
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.dll
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.pdb
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc-master\StackOverflow.data\obj\Debug\StackOverflow.data.csprojResolveAssemblyReference.cache
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc-master\StackOverflow.data\obj\Debug\StackOverflow.data.dll

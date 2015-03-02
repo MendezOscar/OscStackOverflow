@@ -1,0 +1,5 @@
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflowOsc.Domain\bin\Debug\StackOverflowOsc.Domain.dll
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflowOsc.Domain\bin\Debug\StackOverflowOsc.Domain.pdb
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflowOsc.Domain\obj\Debug\StackOverflowOsc.Domain.dll
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflowOsc.Domain\obj\Debug\StackOverflowOsc.Domain.pdb
+C:\Users\MendezOscar\Documents\Visual Studio 2013\Projects\StackOverflowOsc\StackOverflowOsc.Domain\obj\Debug\StackOverflowOsc.Domain.csprojResolveAssemblyReference.cache

@@ -1,0 +1,66 @@
+﻿@model StackOverflowOsc.Web.Models.AccountProfileModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Profile</h2>
+
+<div>
+    <h4>AccountProfileModel</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Badges)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Badges)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reputation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reputation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionAsked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionAsked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answers)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
