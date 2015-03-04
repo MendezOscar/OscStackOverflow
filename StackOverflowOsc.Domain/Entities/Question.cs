@@ -21,7 +21,6 @@ namespace StackOverflowOsc.Domain.Entities
         public int Votes { get; set; }
         public string Tittle { get; set; }
         public DateTime CreationDate { get; set; }
-
-
+        public Guid State { get; set; }
     }
 }

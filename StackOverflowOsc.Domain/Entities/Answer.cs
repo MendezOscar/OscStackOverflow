@@ -20,5 +20,6 @@ namespace StackOverflowOsc.Domain.Entities
         public string OwnerName { get; set; }
         public DateTime CreationDate { get; set; }
         private bool State { get; set; }
+        public Guid QuestionId { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Antlr.Runtime.Misc;
 using AutoMapper;
 using StackOverflow.data;
@@ -16,21 +17,23 @@ namespace StackOverflowOsc.Web.Controllers
     [Authorize]
     public class QuestionController : Controller
     {
+        private readonly IMappingEngine _mappingEngine;
+        public QuestionController(IMappingEngine mappingEngine)
+        {
+            _mappingEngine = mappingEngine;
+        }
         //
         // GET: /Question/
         [AllowAnonymous]
-        public ActionResult Index(QuestionListModel modelQuestion)
+        public ActionResult Index()
         {
             List<QuestionListModel> models = new List<QuestionListModel>();
-            AutoMapper.Mapper.CreateMap<Question, QuestionListModel>().ReverseMap();
-            var Context = new StackOverflowContext();
-            var contats = from contact in Context.Questions select contact;
+            var context = new StackOverflowContext();
 
-            foreach (var i in contats)
+            foreach (Question i in context.Questions)
             {
-                //var model = Mapper.Map < Question, QuestionListModel>(i);
                 QuestionListModel question = new QuestionListModel();
-                question.OwnerName = "Oscar";
+                question.OwnerName = i.Owner.Name;
                 question.QuestionId = i.ID;
                 question.OwnerId = Guid.NewGuid();
                 question.CreationName = i.CreationDate;
@@ -46,14 +49,26 @@ namespace StackOverflowOsc.Web.Controllers
         [HttpPost]
         public ActionResult AskQuestion(AskQuestionModel modelQuestion)
         {
-            AutoMapper.Mapper.CreateMap<Question, AskQuestionModel>().ReverseMap();
-            Question newQuestion = AutoMapper.Mapper.Map<AskQuestionModel, Question>(modelQuestion);
-            newQuestion.Tittle = modelQuestion.Title;
-            newQuestion.Description = modelQuestion.Description;
-            var Context = new StackOverflowContext();
-            Context.Questions.Add(newQuestion);
-            Context.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var context = new StackOverflowContext();
+                var newQuestion = _mappingEngine.Map<AskQuestionModel, Question>(modelQuestion);
+                HttpCookie cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+
+                if (cookie != null)
+                {
+                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+                    Guid ownerId = Guid.Parse(ticket.Name);
+                    newQuestion.Votes = 0;
+                    newQuestion.Owner = context.Accounts.FirstOrDefault(x => x.ID == ownerId);
+                    newQuestion.CreationDate = DateTime.Now;
+                    newQuestion.State = Guid.NewGuid();
+                    context.Questions.Add(newQuestion);
+                    context.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            return View(modelQuestion);
         }
 
         public ActionResult AskQuestion()
@@ -61,26 +76,16 @@ namespace StackOverflowOsc.Web.Controllers
             return View(new AskQuestionModel());
         }
 
-        [HttpPost]
+        [AllowAnonymous]
         public ActionResult ShowQuestion(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<Question, ShowQuestionModel>().ReverseMap();
-            var Context = new StackOverflowContext();
-            var QuestionShow = Context.Questions.Find(id);
-            ShowQuestionModel newShowQuestion = AutoMapper.Mapper.Map<Question, ShowQuestionModel>(QuestionShow);
-
-            return View(newShowQuestion);
+            ShowQuestionModel modelShow = new ShowQuestionModel();
+            var question = _mappingEngine.Map<ShowQuestionModel, Question>(modelShow);
+            var context = new StackOverflowContext();
+            modelShow.Title = context.Questions.FirstOrDefault(x => x.ID == id).Tittle;
+            modelShow.Description = context.Questions.FirstOrDefault(x => x.ID == id).Description;
+            modelShow.Votes = context.Questions.FirstOrDefault(x => x.ID == id).Votes;
+            return View(modelShow);
         }
-
-        [AllowAnonymous]
-        public ActionResult ShowQuestion()
-        {
-            return View(new ShowQuestionModel());
-        }
-
-        public ActionResult Answers()
-        {
-            return View(new AnsWersModel());
-        }
-	}
+    }
 }

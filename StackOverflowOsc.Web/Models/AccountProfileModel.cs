@@ -13,8 +13,6 @@ namespace StackOverflowOsc.Web.Models
         public string Email { get; set; }
         public string Badges { get; set; }
         public int Reputation { get; set; }
-        public int QuestionAsked { get; set; }
-        public int Answers { get; set; }
 
     }
 }

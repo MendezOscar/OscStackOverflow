@@ -1,15 +1,23 @@
+﻿using System.Web.Mvc;
 using Autofac;
+using Autofac.Integration.Mvc;
 using AutoMapper;
 
 namespace StackOverflowOsc.Web
 {
-    public static class AutofacConfig
+    public static class AutoFacConfig
     {
         public static void Register()
         {
             var builder = new ContainerBuilder();
-            builder.Register(c => Mapper.Engine).As<MappingEngine>();
-            //builder.Build();
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterFilterProvider();
+            builder.RegisterSource(new ViewRegistrationSource());
+            builder.Register(c => Mapper.Engine).As<IMappingEngine>();
+
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
         }
     }
 }

@@ -14,6 +14,11 @@ namespace StackOverflowOsc.Web.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IMappingEngine _mappingEngine;
+        public AccountController(IMappingEngine mappingEngine)
+        {
+            _mappingEngine = mappingEngine;
+        }
         public ActionResult Register()
         {
             return View(new AccountRegisterModel());
@@ -45,11 +50,10 @@ namespace StackOverflowOsc.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                AutoMapper.Mapper.CreateMap<Account, AccountRegisterModel>().ReverseMap();
-                Account newAccount = AutoMapper.Mapper.Map<AccountRegisterModel, Account>(model);
-                var Context = new StackOverflowContext();
-                Context.Accounts.Add(newAccount);
-                Context.SaveChanges();
+                var newAccount = _mappingEngine.Map<AccountRegisterModel, Account>(model);
+                var context = new StackOverflowContext();
+                context.Accounts.Add(newAccount);
+                context.SaveChanges();
                 return RedirectToAction("Login");
             }
             return View(model);
@@ -79,17 +83,15 @@ namespace StackOverflowOsc.Web.Controllers
             return RedirectToAction("Index", "Question");
         }
 
-
-        public ActionResult Profile(Guid id)
+        [Authorize] 
+        public ActionResult Profile(AccountProfileModel modelPro, Guid id)
         {
-            var Context = new StackOverflowContext();
-            var account = Context.Accounts.FirstOrDefault(x => x.ID == id);
-            if (account != null)
-            {
-                AutoMapper.Mapper.CreateMap<AccountProfileModel, Account>().ReverseMap();
-                AccountProfileModel newAccount = AutoMapper.Mapper.Map<Account, AccountProfileModel>(account);
-                return View(newAccount);
-            }
+            var context = new StackOverflowContext();
+            modelPro.Name = context.Accounts.FirstOrDefault(x => x.ID == id).Name;
+            modelPro.Email = context.Accounts.FirstOrDefault(x => x.ID == id).Email;
+            modelPro.Reputation = 0;
+            modelPro.Badges = "Curious";
+            
             return View(new AccountProfileModel());
         }
 
