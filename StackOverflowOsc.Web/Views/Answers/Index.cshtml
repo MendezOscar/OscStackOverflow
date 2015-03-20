@@ -1,0 +1,95 @@
+﻿@model System.Collections.Generic.IEnumerable<StackOverflowOsc.Web.Models.AnswerListModel>
+
+@{
+    ViewBag.Title = "Answers";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Back", "Index", "Question")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.AnswerId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.AnswerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.OwnerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Votes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </th>
+        <th>Good</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <td>
+        @using (Html.BeginForm("IsCorrect", "Answers", item))
+        {
+            if (item.Good)
+            {
+                <button type="button" class="btn btn-success">Correct</button>
+            }
+            else
+            {
+                <button class="btn btn-default" type="submit">Correct</button>
+            }
+        }
+
+    </td>
+     <td>
+            @Html.ActionLink("+", "Vote", "Answers", new {answerId = item.AnswerId}, new {@class = "link-button"}) |
+
+            @Html.DisplayFor(modelItem => item.Votes)
+        </td>
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.AnswerId)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.AnswerName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.OwnerName)
+        </td>*@
+        <td>
+            @Html.ActionLink(item.AnswerName, "ViewAnswer", "Answer", new { id = item.AnswerId }, null)
+        <td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.OwnerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionId)
+            </td>*@
+<td>
+            @Html.DisplayFor(modelItem => item.Votes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Good)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
+    </tr>
+}
+
+</table>

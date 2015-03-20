@@ -10,7 +10,6 @@ namespace StackOverflow.data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "StackOverflow.data.StackOverflowContext";
         }
 
         protected override void Seed(StackOverflow.data.StackOverflowContext context)

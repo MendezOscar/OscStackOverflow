@@ -24,3 +24,13 @@ C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverf
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.csprojResolveAssemblyReference.cache
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.dll
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.pdb
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\Newtonsoft.Json.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\System.Web.Http.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\Newtonsoft.Json.xml
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\System.Web.Http.xml
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.Migrations.Initial.resources
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.csproj.GenerateResource.Cache

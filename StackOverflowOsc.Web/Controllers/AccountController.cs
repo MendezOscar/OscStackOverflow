@@ -14,35 +14,16 @@ namespace StackOverflowOsc.Web.Controllers
 {
     public class AccountController : Controller
     {
+        public UnitOfWork UnitOfWork = new UnitOfWork();
         private readonly IMappingEngine _mappingEngine;
         public AccountController(IMappingEngine mappingEngine)
         {
             _mappingEngine = mappingEngine;
         }
+
         public ActionResult Register()
         {
             return View(new AccountRegisterModel());
-        }
-
-
-        public ActionResult ForgotPassword()
-        {
-            return View(new AccountForgotPasswordModel());
-        }
-
-        [HttpPost]
-        public ActionResult ForgotPassword(AccountForgotPasswordModel modelPass)
-        {
-            //MailMessage mail = new MailMessage("oscarito16m@gmail.com", modelPass.Email);
-            //SmtpClient client = new SmtpClient();
-            //client.Port = 25;
-            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            //client.Credentials = new System.Net.NetworkCredential("oscarito16m@gmail.com", "oscar16m");
-            //client.Host = "smtp.gmail.com";
-            //mail.Subject = "this is a test email.";
-            //mail.Body = "this is my test email body";
-            //client.Send(mail);
-            return RedirectToAction("Login");
         }
 
         [HttpPost]
@@ -50,11 +31,14 @@ namespace StackOverflowOsc.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newAccount = _mappingEngine.Map<AccountRegisterModel, Account>(model);
-                var context = new StackOverflowContext();
-                context.Accounts.Add(newAccount);
-                context.SaveChanges();
-                return RedirectToAction("Login");
+                if (model.Password == model.ComfirmPassword)
+                {
+                    Mapper.CreateMap<AccountRegisterModel, Account>();
+                    var newAccount = _mappingEngine.Map<AccountRegisterModel, Account>(model);
+                    UnitOfWork.AccountRepository.InsertEntity(newAccount);
+                    UnitOfWork.Save();
+                    return RedirectToAction("Login");
+                }
             }
             return View(model);
         }
@@ -62,13 +46,16 @@ namespace StackOverflowOsc.Web.Controllers
         [HttpPost]
         public ActionResult Login(AccountLoginModel modelLogin)
         {
-            var Context = new StackOverflowContext();
-            var account = Context.Accounts.FirstOrDefault(x=>x.Email == modelLogin.Email && x.Password==modelLogin.Password);
-            if (account != null)
+            if (ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(modelLogin.Email, false);
-                return RedirectToAction("Index", "Question");
+                var account = UnitOfWork.AccountRepository.GetWithFilter(x => x.Email == modelLogin.Email && x.Password == modelLogin.Password);
+                if (account != null)
+                {
+                    FormsAuthentication.SetAuthCookie(modelLogin.Email, false);
+                    return RedirectToAction("Index", "Question");
+                }
             }
+            ViewBag.Message = "Invalid email or password ";
             return View(modelLogin);
         }
 
@@ -84,24 +71,46 @@ namespace StackOverflowOsc.Web.Controllers
         }
 
         [Authorize] 
-        public ActionResult Profile(AccountProfileModel modelPro, Guid id)
+        public ActionResult Profile(Guid id)
         {
-            var context = new StackOverflowContext();
-            modelPro.Name = context.Accounts.FirstOrDefault(x => x.ID == id).Name;
-            modelPro.Email = context.Accounts.FirstOrDefault(x => x.ID == id).Email;
-            modelPro.Reputation = 0;
-            modelPro.Badges = "Curious";
-            
-            return View(new AccountProfileModel());
+            Mapper.CreateMap<Account, AccountProfileModel>();
+            var owner = UnitOfWork.AccountRepository.GetEntityById(idd);
+            var model = Mapper.Map<Account, AccountProfileModel>(owner);
+            return View(model);
+        }
+
+        public ActionResult ChangePassword(Guid id)
+        {
+            var model = new ChangePasswordModel() { OwnerId = id };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordModel model)
+        {
+            var account = UnitOfWork.AccountRepository.GetEntityById(model.OwnerId);
+            if (ModelState.IsValid)
+            {
+                if (model.Password == model.ComfirmPassword)
+                {
+                    account.Password = model.Password;
+                    UnitOfWork.AccountRepository.Update(account);
+                    UnitOfWork.Save();
+                    return RedirectToAction("Login");
+                }
+                ModelState.AddModelError("Error", "Password and Confirm Passsword must be the same");
+            }
+            return View(model);
+
         }
 
         public ActionResult PassWordRecovery()
         {
-            return View(new ForgotPasswordRecoveryModel());
+            return View(new ChangePasswordModel());
         }
 
         [HttpPost]
-        public ActionResult ForgotPasswordRecovery(AccountForgotPasswordModel modelPass)
+        public ActionResult ForgotPasswordRecovery(ForgotPasswordModel modelPass)
         {
             
             return RedirectToAction("Login");

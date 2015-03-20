@@ -8,19 +8,23 @@ namespace StackOverflowOsc.Domain.Entities
 {
     public class Question : IEntity
     {
-        public Guid ID { get; private set; }
+        public Guid Id { get; private set; }
 
         public Question()
         {
+            Id = Guid.NewGuid();
             CreationDate = DateTime.Now;
-            ID = Guid.NewGuid();
+            ModificationDate = DateTime.Now;
+            State = false;
         }
 
-        public Account Owner { get; set; }
-        public string Description { get; set; }
+        public virtual ICollection<Answer> Answers { get; set; }
         public int Votes { get; set; }
-        public string Tittle { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Guid Owner { get; set; }
         public DateTime CreationDate { get; set; }
-        public Guid State { get; set; }
+        public DateTime ModificationDate { get; set; }
+        public bool State { get; set; }
     }
 }

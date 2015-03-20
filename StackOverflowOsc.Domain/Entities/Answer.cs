@@ -8,18 +8,14 @@ namespace StackOverflowOsc.Domain.Entities
 {
     public class Answer : IEntity
     {
-        public Guid ID { get; private set; }
-
-        public Answer()
-        {
-            CreationDate = DateTime.Now;
-            ID = Guid.NewGuid();
-        }
-        public String Description { get; set; }
+        public Answer() { Id = Guid.NewGuid(); }
+        public Guid Id { get; set; }
+        public ICollection<Guid> Users { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public int Votes { get; set; }
-        public string OwnerName { get; set; }
-        public DateTime CreationDate { get; set; }
-        private bool State { get; set; }
+        public Guid AccountId { get; set; }
         public Guid QuestionId { get; set; }
+        public bool Correct { get; set; }
     }
 }

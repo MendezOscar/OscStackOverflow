@@ -24,51 +24,33 @@ namespace StackOverflowOsc.Web.Controllers
         }
         //
         // GET: /Question/
+        public UnitOfWork UnitOfWork = new UnitOfWork();
         [AllowAnonymous]
         public ActionResult Index()
         {
-            List<QuestionListModel> models = new List<QuestionListModel>();
-            var context = new StackOverflowContext();
-
-            foreach (Question i in context.Questions)
+            var questions = UnitOfWork.QuestionRepository.Get();
+            var modelQuestion = new List<QuestionListModel>();
+            Mapper.CreateMap<Question, QuestionListModel>().ReverseMap();
+            foreach (var q in questions)
             {
-                QuestionListModel question = new QuestionListModel();
-                question.OwnerName = i.Owner.Name;
-                question.QuestionId = i.ID;
-                question.OwnerId = Guid.NewGuid();
-                question.CreationName = i.CreationDate;
-                question.Tittle = i.Tittle;
-                question.Tittle = i.Tittle ?? "Hola";
-                models.Add(question);
+                var modelQ = Mapper.Map<Question, QuestionListModel>(q);
+                modelQ.OwnerId = q.Owner;
+                modelQ.OwnerName = UnitOfWork.AccountRepository.GetEntityById(modelQ.OwnerId).Name;
+                modelQuestion.Add(modelQ);
             }
-
-            return View(models);
+            return View(modelQuestion);
             
         }
 
         [HttpPost]
         public ActionResult AskQuestion(AskQuestionModel modelQuestion)
         {
-            if (ModelState.IsValid)
-            {
-                var context = new StackOverflowContext();
-                var newQuestion = _mappingEngine.Map<AskQuestionModel, Question>(modelQuestion);
-                HttpCookie cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-
-                if (cookie != null)
-                {
-                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
-                    Guid ownerId = Guid.Parse(ticket.Name);
-                    newQuestion.Votes = 0;
-                    newQuestion.Owner = context.Accounts.FirstOrDefault(x => x.ID == ownerId);
-                    newQuestion.CreationDate = DateTime.Now;
-                    newQuestion.State = Guid.NewGuid();
-                    context.Questions.Add(newQuestion);
-                    context.SaveChanges();
-                }
-                return RedirectToAction("Index");
-            }
-            return View(modelQuestion);
+            Mapper.CreateMap<AskQuestionModel, Question>().ReverseMap();
+            var question = Mapper.Map<AskQuestionModel, Question>(modelQuestion);
+            question.Owner = Guid.Parse(HttpContext.User.Identity.Name);
+            UnitOfWork.QuestionRepository.InsertEntity(question);
+            UnitOfWork.Save();
+            return RedirectToAction("Index", "Question");
         }
 
         public ActionResult AskQuestion()
@@ -77,15 +59,22 @@ namespace StackOverflowOsc.Web.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ShowQuestion(Guid id)
+        public ActionResult ShowQuestion(Guid questionId)
         {
-            ShowQuestionModel modelShow = new ShowQuestionModel();
-            var question = _mappingEngine.Map<ShowQuestionModel, Question>(modelShow);
-            var context = new StackOverflowContext();
-            modelShow.Title = context.Questions.FirstOrDefault(x => x.ID == id).Tittle;
-            modelShow.Description = context.Questions.FirstOrDefault(x => x.ID == id).Description;
-            modelShow.Votes = context.Questions.FirstOrDefault(x => x.ID == id).Votes;
-            return View(modelShow);
+            Mapper.CreateMap<Question, ShowQuestionModel>();
+            var question = UnitOfWork.QuestionRepository.GetEntityById(questionId);
+            var owner = UnitOfWork.AccountRepository.GetEntityById(question.Owner);
+            var model = Mapper.Map<Question, ShowQuestionModel>(question);
+            return View(model);
+        }
+
+        public ActionResult Vote(Guid id)
+        {
+            var question = UnitOfWork.QuestionRepository.GetEntityById(id);
+            question.Votes++;
+            UnitOfWork.QuestionRepository.Update(question);
+            UnitOfWork.Save();
+            return RedirectToAction("ShowQuestion", new { Id = id });
         }
     }
 }

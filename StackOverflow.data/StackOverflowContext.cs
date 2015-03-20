@@ -12,7 +12,8 @@ namespace StackOverflow.data
 
     public class StackOverflowContext : DbContext
     {
-        public StackOverflowContext() : base("ConnectionString.get")
+        public StackOverflowContext()
+            : base(ConnectionString.get())
         {
 
         }
@@ -27,7 +28,7 @@ namespace StackOverflow.data
         public static string get()
        {
             var environment = ConfigurationManager.AppSettings["Environment"];
-            return string.Format("name = {0}, Environment");
+            return string.Format("name = {0}", environment);
         }
     }
 }

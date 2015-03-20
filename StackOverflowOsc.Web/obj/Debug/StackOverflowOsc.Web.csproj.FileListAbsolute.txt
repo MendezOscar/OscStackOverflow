@@ -127,3 +127,10 @@ C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverf
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\obj\Debug\StackOverflowOsc.Web.csprojResolveAssemblyReference.cache
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\obj\Debug\StackOverflowOsc.Web.dll
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\obj\Debug\StackOverflowOsc.Web.pdb
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\System.Web.Http.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\System.Web.Http.WebHost.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\System.Net.Http.Formatting.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\System.Web.Http.xml
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\System.Web.Http.WebHost.xml
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\log4net.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\log4net.xml
