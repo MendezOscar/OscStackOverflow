@@ -152,14 +152,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="CostumeDataNotations\CapitalLetter.cs" />
     <Compile Include="CostumeDataNotations\ContainsNumberAttribute.cs" />
     <Compile Include="CostumeDataNotations\Letters_NumberAttribute.cs" />
     <Compile Include="CostumeDataNotations\RepeatedLettersAttribute.cs" />
     <Compile Include="CostumeDataNotations\VocalAtTribute.cs" />
     <Compile Include="CostumeDataNotations\LoginAttribute.cs" />
-    <Compile Include="Models\AccountForgotPasswordModel.cs" />
+    <Compile Include="Models\ForgotPasswordModel.cs" />
     <Compile Include="Models\AccountLoginModel.cs" />
     <Compile Include="Models\AccountProfileModel.cs" />
     <Compile Include="Models\AccountRegisterModel.cs" />
@@ -170,7 +169,7 @@
     <Compile Include="Models\AnswerListModel.cs" />
     <Compile Include="Models\AskQuestionModel.cs" />
     <Compile Include="Models\CreateAnswerModel.cs" />
-    <Compile Include="Models\ForgotPasswordRecoveryModel.cs" />
+    <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\QuestionListModel.cs" />
     <Compile Include="Models\ShowAnswerModel.cs" />
     <Compile Include="Models\ShowQuestionModel.cs" />

@@ -74,7 +74,7 @@ namespace StackOverflowOsc.Web.Controllers
         public ActionResult Profile(Guid id)
         {
             Mapper.CreateMap<Account, AccountProfileModel>();
-            var owner = UnitOfWork.AccountRepository.GetEntityById(idd);
+            var owner = UnitOfWork.AccountRepository.GetEntityById(id);
             var model = Mapper.Map<Account, AccountProfileModel>(owner);
             return View(model);
         }

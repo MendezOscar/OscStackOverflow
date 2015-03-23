@@ -32,5 +32,5 @@ C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverf
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\System.Web.Http.xml
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\bin\Debug\System.Web.Http.WebHost.xml
-C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.Migrations.Initial.resources
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.Migrations.initial.resources
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflow.data\obj\Debug\StackOverflow.data.csproj.GenerateResource.Cache
