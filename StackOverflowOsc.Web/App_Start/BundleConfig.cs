@@ -21,7 +21,7 @@ namespace StackOverflowOsc.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/SuperHero.css",
                       "~/Content/site.css"));
         }
     }

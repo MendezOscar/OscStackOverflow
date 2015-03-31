@@ -4,9 +4,14 @@
     ViewBag.Title = "Register";
 }
 
-<h2>Register</h2>
-
-
+<h2></h2>
+@if (TempData["Error"] != null)
+{
+    <div class="bg-danger " style="width: 550px;height: 40px">
+        <p><strong>Error:</strong> @TempData["Error"].ToString()</p>
+    </div>
+}
+@Html.ValidationMessage("Error")
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()

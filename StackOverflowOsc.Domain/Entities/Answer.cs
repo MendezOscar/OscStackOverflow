@@ -17,5 +17,6 @@ namespace StackOverflowOsc.Domain.Entities
         public Guid AccountId { get; set; }
         public Guid QuestionId { get; set; }
         public bool Correct { get; set; }
+        public int Views { get; set; }
     }
 }

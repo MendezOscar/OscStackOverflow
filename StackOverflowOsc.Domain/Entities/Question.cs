@@ -26,5 +26,8 @@ namespace StackOverflowOsc.Domain.Entities
         public DateTime CreationDate { get; set; }
         public DateTime ModificationDate { get; set; }
         public bool State { get; set; }
+        public int Views { get; set; }
+        public int AnswerCount { get; set; }
+
     }
 }

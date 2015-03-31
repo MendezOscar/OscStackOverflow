@@ -3,8 +3,24 @@
 @{
     ViewBag.Title = "Login";
 }
+<head>
+    <title>Login</title>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+</head>
 
 <h2>Login</h2>
+@if (TempData["Success"] != null)
+{
+    <div class="bg-info" style="width: 550px;height: 40px">
+        <p><strong>Success:</strong> @TempData["Success"].ToString()</p>
+    </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="bg-danger" style="width: 550px;height: 40px">
+        <p><strong>Error:</strong> @TempData["Error"].ToString()</p>
+    </div>
+}
 
 
 @using (Html.BeginForm()) 
@@ -12,11 +28,11 @@
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <h4></h4>
-        <hr />
+        <hr/>
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Email, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Email)
                 @Html.ValidationMessageFor(model => model.Email)
@@ -24,20 +40,24 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Password, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)
-                @Html.ActionLink("Forgot Password", "ForgotPassword")
+                @Html.ActionLink("Forgot Password", "ForgotPassword", "Account")
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
+                <input type="submit" value="Login" class="btn btn-default"/>
             </div>
         </div>
     </div>
+
+            <div class="g-recaptcha" data-sitekey="6Le6EAQTAAAAALaPhos0uR9A7P3tE2gg2Z24MwBx"></div>
+
+    
 }
 
 <div>

@@ -134,3 +134,8 @@ C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverf
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\System.Web.Http.WebHost.xml
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\log4net.dll
 C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\log4net.xml
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\mailgun_csharp.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\RestSharp.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\Typesafe.Mailgun.dll
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\RestSharp.xml
+C:\Users\MendezOscar\Desktop\StackOverflowOsc-master\StackOverflowOsc\StackOverflowOsc.Web\bin\Typesafe.Mailgun.xml

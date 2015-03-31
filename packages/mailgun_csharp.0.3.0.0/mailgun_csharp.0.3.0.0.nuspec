@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>mailgun_csharp</id>
+    <version>0.3.0.0</version>
+    <title>Mailgun API Wrapper</title>
+    <authors>Charles King</authors>
+    <owners>Charles King</owners>
+    <licenseUrl>https://raw.githubusercontent.com/bringking/mailgun_csharp/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/bringking/mailgun_csharp</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .NET Mailgun API wrapper. Currently supports sending messages and batch messages.</description>
+    <releaseNotes>Made all messages Multi-part to avoid errors on large batches</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Mailgun API Mailer REST</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="6.0.6" />
+    </dependencies>
+  </metadata>
+</package>

@@ -68,13 +68,22 @@ namespace StackOverflowOsc.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Vote(Guid id)
+        public ActionResult VotePlus(Guid id)
         {
             var question = UnitOfWork.QuestionRepository.GetEntityById(id);
             question.Votes++;
             UnitOfWork.QuestionRepository.Update(question);
             UnitOfWork.Save();
             return RedirectToAction("ShowQuestion", new { Id = id });
+        }
+
+        public ActionResult VoteLess(Guid questId)
+        {
+            var question = UnitOfWork.QuestionRepository.GetEntityById(questId);
+            question.Votes -= 1;
+            UnitOfWork.QuestionRepository.Update(question);
+            UnitOfWork.Save();
+            return RedirectToAction("ShowQuestion", "Question", new { questionId = questId });
         }
     }
 }
