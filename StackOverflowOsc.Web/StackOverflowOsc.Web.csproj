@@ -183,6 +183,7 @@
     <Compile Include="Models\ShowAnswerModel.cs" />
     <Compile Include="Models\ShowQuestionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -218,14 +219,14 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Question\Index.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Question\AskQuestion.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordRecovery.cshtml" />
     <Content Include="Views\Question\ShowQuestion.cshtml" />
     <Content Include="Views\Answers\Index.cshtml" />
     <Content Include="Views\Answers\CreateAnswer.cshtml" />
     <Content Include="Views\Answers\ViewAnswer.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\PasswordRecovery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StackOverflow.data\StackOverflow.data.csproj">

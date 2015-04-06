@@ -29,16 +29,20 @@ namespace StackOverflowOsc.Web.Controllers
         public ActionResult Index()
         {
             var questions = UnitOfWork.QuestionRepository.Get();
-            var modelQuestion = new List<QuestionListModel>();
+            var models = new List<QuestionListModel>();
             Mapper.CreateMap<Question, QuestionListModel>().ReverseMap();
+            TimeCalculator calculator = new TimeCalculator();
             foreach (var q in questions)
             {
-                var modelQ = Mapper.Map<Question, QuestionListModel>(q);
-                modelQ.OwnerId = q.Owner;
-                modelQ.OwnerName = UnitOfWork.AccountRepository.GetEntityById(modelQ.OwnerId).Name;
-                modelQuestion.Add(modelQ);
+                var date = calculator.GetTime(q.CreationDate);
+                var model = Mapper.Map<Question, QuestionListModel>(q);
+                model.Date = date;
+                model.OwnerId = q.Owner;
+                model.OwnerName = UnitOfWork.AccountRepository.GetEntityById(model.OwnerId).Name;
+                model.LastName = UnitOfWork.AccountRepository.GetEntityById(model.OwnerId).LastName;
+                models.Add(model);
             }
-            return View(modelQuestion);
+            return View(models);
             
         }
 
@@ -63,18 +67,29 @@ namespace StackOverflowOsc.Web.Controllers
         {
             Mapper.CreateMap<Question, ShowQuestionModel>();
             var question = UnitOfWork.QuestionRepository.GetEntityById(questionId);
+            question.Views += 1;
             var owner = UnitOfWork.AccountRepository.GetEntityById(question.Owner);
             var model = Mapper.Map<Question, ShowQuestionModel>(question);
+            TimeCalculator calculator = new TimeCalculator();
+            string date = calculator.GetTime(question.CreationDate);
+            model.Date = date;
+            UnitOfWork.QuestionRepository.Update(question);
+            UnitOfWork.Save();
+            model.OwnerEmail = owner.Email;
+            model.Name = owner.Name;
+            model.LastName = owner.LastName;
             return View(model);
         }
 
-        public ActionResult VotePlus(Guid id)
+        public ActionResult VotePlus(Guid questId)
         {
-            var question = UnitOfWork.QuestionRepository.GetEntityById(id);
-            question.Votes++;
+            var ownerId = Guid.Parse(HttpContext.User.Identity.Name);
+
+            var question = UnitOfWork.QuestionRepository.GetEntityById(questId);
+            question.Votes += 1;
             UnitOfWork.QuestionRepository.Update(question);
             UnitOfWork.Save();
-            return RedirectToAction("ShowQuestion", new { Id = id });
+            return RedirectToAction("ShowQuestion", "Question", new { questionId = questId });
         }
 
         public ActionResult VoteLess(Guid questId)

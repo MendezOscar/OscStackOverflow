@@ -14,6 +14,11 @@ namespace StackOverflow.data
         internal DbSet<TEntity> DbSet;
         private bool set;
 
+        public void Load(TEntity entity, string list)
+        {
+            context.Entry(entity).Collection(list).Load();
+        }
+
         public Repository(StackOverflowContext context)
         {
             this.context = context;
@@ -89,7 +94,7 @@ namespace StackOverflow.data
             Delete(entityToDelete);
         }
         public virtual void Delete(TEntity entityToDelete)
-        {
+        { 
             if (context.Entry(entityToDelete).State == EntityState.Detached)
             {
                 DbSet.Attach(entityToDelete);

@@ -44,9 +44,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)
-                @Html.ActionLink("Forgot Password", "ForgotPassword", "Account")
+                @Html.ActionLink("Forgot Password", "ForgotPassword")
             </div>
         </div>
+        @if (@Model.CaptchaActive)
+        {
+            <div class="g-recaptcha" data-sitekey="6Le6EAQTAAAAALaPhos0uR9A7P3tE2gg2Z24MwBx"></div>
+            @Html.ValidationMessage("captcha")
+        }
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -54,15 +59,13 @@
             </div>
         </div>
     </div>
-
-            <div class="g-recaptcha" data-sitekey="6Le6EAQTAAAAALaPhos0uR9A7P3tE2gg2Z24MwBx"></div>
-
     
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Create new account", "Register")
+    @Html.ActionLink("Create new account", "Register") |
+    @Html.ActionLink("Recover Password", "PasswordRecovery")
 </div>
 
 @section Scripts {

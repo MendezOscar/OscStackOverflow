@@ -10,6 +10,5 @@ namespace StackOverflowOsc.Web.Models
     {
         [Required]
         public string Description { get; set; }
-        public Guid QuestionId { get; set; }
     }
 }

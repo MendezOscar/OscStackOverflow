@@ -115,15 +115,22 @@ namespace StackOverflowOsc.Web.Controllers
             return RedirectToAction("Index", "Question");
         }
 
-        [Authorize] 
-        public ActionResult Profile(Guid id)
+        public ActionResult Profile(Guid ownerId)
         {
+            var owner = UnitOfWork.AccountRepository.GetEntityById(ownerId);
+            UnitOfWork.AccountRepository.Load(owner, "Questions");
+            UnitOfWork.AccountRepository.Load(owner, "Answers");
             Mapper.CreateMap<Account, AccountProfileModel>();
-            var owner = UnitOfWork.AccountRepository.GetEntityById(id);
             owner.Views += 1;
+            owner.LastSeen = DateTime.Now;
+            TimeCalculator calculator = new TimeCalculator();
+            owner.Questions = owner.Questions.OrderByDescending(x => x.CreationDate).ToList();
+            owner.Answers = owner.Answers.OrderByDescending(x => x.CreationDate).ToList();
             UnitOfWork.AccountRepository.Update(owner);
-            var o = UnitOfWork.AccountRepository.GetEntityById(id);
-            var model = Mapper.Map<Account, AccountProfileModel>(o);
+            UnitOfWork.Save();
+            var model = Mapper.Map<Account, AccountProfileModel>(owner);
+            model.LastSeen = calculator.GetTime(DateTime.Now);
+            model.RegisterDate = calculator.GetTime(DateTime.Now);
             return View(model);
         }
 
@@ -153,13 +160,13 @@ namespace StackOverflowOsc.Web.Controllers
 
         }
 
-        public ActionResult ForgotPassWordRecovery()
+        public ActionResult PasswordRecovery()
         {
             return View(new ForgotPasswordModel());
         }
 
         [HttpPost]
-        public ActionResult ForgotPasswordRecovery(ForgotPasswordModel modelPass)
+        public ActionResult PasswordRecovery(ForgotPasswordModel modelPass)
         {
             if (ModelState.IsValid)
             {

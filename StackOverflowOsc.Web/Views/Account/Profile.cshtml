@@ -1,56 +1,130 @@
-﻿@model StackOverflowOsc.Web.Models.AccountProfileModel
+﻿@using System.Linq
+@using StackOverflowOsc.Domain.Entities
+@model StackOverflowOsc.Web.Models.AccountProfileModel
 
 @{
     ViewBag.Title = "Profile";
 }
 
-<h2>Profile</h2>
+<h2>@Model.Name @Model.LastName</h2>
 
 <div>
-    <h4></h4>
-	<hr />
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
-            <img alt="..." class="img-thumbnail" style="width: 100px; height: 100px">
+            <img src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" class="img-thumbnail" style="width: 100px; height: 100px">
         </dt>
         <dd>
+        </dd>
+        <dt>
+            @if (Model.Email.Any())
+            {
+                @Html.DisplayNameFor(model => model.Email)
+            }
+
+        </dt>
+        <dd>
+            @if (Model.Email.Any())
+            {
+                @Html.DisplayFor(model => model.Email)
+            }
 
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @if (Model.RegisterDate.Any())
+            {
+                @Html.DisplayNameFor(model => model.RegisterDate)
+            }
+
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            @if (Model.RegisterDate.Any())
+            {
+                @Html.DisplayFor(model => model.RegisterDate)
+            }
 
+        </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            @if (Model.Views > 0)
+            {
+                @Html.DisplayNameFor(model => model.Views)
+            }
+
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            @if (Model.Views > 0)
+            {
+                @Html.DisplayFor(model => model.Views)
+            }
 
+        </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Badges)
+            @if (Model.LastSeen.Any())
+            {
+                @Html.DisplayNameFor(model => model.LastSeen)
+            }
+
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Badges)
+            @if (Model.LastSeen.Any())
+            {
+                @Html.DisplayFor(model => model.LastSeen)
+            }
+
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Reputation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Reputation)
-        </dd>
-
+        <dd>@Html.ActionLink("Change Password", "ChangePassword", new { id = Model.UserId })</dd>
     </dl>
+    @if (Model.Questions != null)
+    {
+        foreach (Question q in Model.Questions)
+        {
+
+            if (q != null)
+            {
+                <div>
+                    @Html.ActionLink(q.Title, "ShowQuestion", "Question", new {ID = q.Id}, null) @q.CreationDate
+                </div>
+            }
+        }
+    }
+    <hr>
+    <strong>Latest 5 Answers</strong>
+    @if (Model.Answers != null)
+    {
+        foreach (Answer a in Model.Answers)
+        {
+
+            if (a != null)
+            {
+                <div>
+                    <div style="word-wrap: break-word;"> @Html.ActionLink(a.Description.Substring(0, 10) + "...", "ShowQuestion", "Question", new {ID = a.QuestionId}, null) @a.CreationDate </div>
+                </div>
+            }
+        }
+    }
+
 </div>
-<p>
-    @Html.ActionLink("Change Password", "ForgotPasswordRecovery") |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div>
+    <ul>
+        @foreach (var item in Model.Questions)
+        {
+            <li>
+                @item.ToString();
+            </li>
+        }
+    </ul>
+</div>
+<br />
+<div>
+    <ul>
+        @foreach (var item in Model.Answers)
+        {
+            <li>
+                @item.ToString();
+            </li>
+        }
+    </ul>
+</div>
+<strong>Latest 5 Questions</strong>
+

@@ -21,57 +21,12 @@
     </style>
 </head>
 
-<p>
-    @Html.ActionLink("Ask Question", "AskQuestion")
-</p>
-
 <div>
     <h2 style="display: inline-block">Top Questions</h2>
     <button onclick="window.location.href='/Question/AskQuestion/'" style="display: inline-block; margin-left: 50%" type="button" class="btn btn-warning">Ask Question</button>
 </div>
 <br />
 <hr/>
-
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Tittle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Votes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationName)
-
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OwnerName)
-        </th>
-        <th></th>
-    </tr>*@
-
-@*@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Tittle, "ShowQuestion", new { id = item.QuestionId })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Votes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreationName)
-        </td>
-        <td>            
-            @Html.ActionLink(item.OwnerName, "Profile", "Account", new { id = item.OwnerId }, null)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {id = item.QuestionId}) |
-            @Html.ActionLink("Delete", "Delete", new {id = item.QuestionId})
-        </td>
-        
-    </tr>
-}*@
-
 
 <ul>
     @foreach (var item in Model)
@@ -91,10 +46,10 @@
                     <div>views</div>
                 </div>
                 <blockquote style="display: inline-block">
-                    @Html.ActionLink(@item.Tittle, "ShowQuestion", "Question", new { questionId = item.Id }, null)
+                    @Html.ActionLink(@item.Title, "ShowQuestion", "Question", new { questionId = item.Id }, null)
                     <footer>
-                        Asked @item.ModificationDate ago by
-                        @Html.ActionLink(@item.OwnerName, "Profile", "Account", new { ownerId = item.OwnerId }, null)
+                        Asked @item.Date ago by
+                        @Html.ActionLink(@item.OwnerName + " " + @item.LastName, "Profile", "Account", new { ownerId = item.OwnerId }, null)
                     </footer>
                 </blockquote>
             </div>

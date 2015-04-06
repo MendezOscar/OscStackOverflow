@@ -7,14 +7,16 @@ namespace StackOverflowOsc.Web.Models
 {
     public class AnswerListModel
     {
-        public Guid AnswerId { get; set; }
-        public string AnswerName { get; set; }
-        public string OwnerName { get; set; }
-        public Guid OwnerId { get; set; }
-        public Guid QuestionId { get; set; }
+        public string Description { get; set; }
         public int Votes { get; set; }
-        public DateTime CreationTime { get; set; }      
-        public bool Good { get; set; }
+        public Guid AccountId { get; set; }
+        public Guid QuestionId { get; set; }
+        public string OwnerName { get; set; }
+        public string LastName { get; set; }
+        public Guid Id { get; set; }
+        public bool Correct { get; set; }
+        public string Date { get; set; }
+        public int Views { get; set; }
         
     }
 }
